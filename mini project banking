@@ -1,0 +1,68 @@
+class BankAccount:
+    def __init__(self, account_number, pin, balance=0):
+        self.account_number = account_number
+        self.pin = pin
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"Deposited ${amount}. Current balance is ${self.balance}")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient funds!")
+        else:
+            self.balance -= amount
+            print(f"Withdrew ${amount}. Current balance is ${self.balance}")
+
+    def check_balance(self):
+        print(f"Account Balance: ${self.balance}")
+
+    def change_pin(self, new_pin):
+        self.pin = new_pin
+        print("PIN changed successfully")
+
+    def __str__(self):
+        return f"Account Number: {self.account_number}\nBalance: ${self.balance}"
+
+
+def main():
+    # Sample usage
+    print("Welcome to Our Bank!")
+    account_number = input("Enter your account number: ")
+    pin = input("Enter your PIN: ")
+
+    # Example account initialization (can be extended to a database or file-based storage)
+    account = BankAccount(account_number, pin)
+
+    # Main menu loop
+    while True:
+        print("\nChoose an option:")
+        print("1. Deposit")
+        print("2. Withdraw")
+        print("3. Check Balance")
+        print("4. Change PIN")
+        print("5. Exit")
+
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == '1':
+            amount = float(input("Enter amount to deposit: $"))
+            account.deposit(amount)
+        elif choice == '2':
+            amount = float(input("Enter amount to withdraw: $"))
+            account.withdraw(amount)
+        elif choice == '3':
+            account.check_balance()
+        elif choice == '4':
+            new_pin = input("Enter new PIN: ")
+            account.change_pin(new_pin)
+        elif choice == '5':
+            print("Thank you for banking with us!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 5.")
+
+
+if __name__ == "__main__":
+    main()
